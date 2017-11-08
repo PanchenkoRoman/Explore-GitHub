@@ -1,0 +1,50 @@
+@mixin flex($justify, $align, $direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $justify;
+}
+
+.home-page-container{
+  background-image: linear-gradient(180deg, rgba(255,255,255,0) 60%, #fff),linear-gradient(70deg, #dbedff 32%, #ebfff0);
+  @include flex(center, center, column);
+  height: 100vh;
+
+  .center-block{
+    width: 30%;
+    height: 25vh;
+    background-color: rgba(40, 40, 40, 0.9);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form{
+      @include flex(center, center, column);
+      width: 100%;
+    }
+
+    button{
+      cursor: pointer;
+      margin-top: 20px;
+      height: 35px;
+      width: 90px;
+      border: none;
+      border-radius: 5px;
+      background-color: #2b6b7e;
+      color: white;
+      font-weight: 700;
+      &:hover{
+        background-color: white;
+        color: #2b6b7e;
+      }
+    }
+
+    input{
+      width: 80%;
+      height: 20px;
+      font-size: 12px;
+
+    }
+  }
+}
