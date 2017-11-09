@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import configureStore from './configureStore';
 
 import './styles/main.scss'
-import App from './App';
+import Router from './routes';
 import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router />
   </Provider>
   , document.getElementById('root'));
 registerServiceWorker();

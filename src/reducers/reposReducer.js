@@ -1,10 +1,14 @@
 
-const INITIAL_STATE = [];
+const INITIAL_STATE = {};
 
 export default function(state = INITIAL_STATE, action){
+  console.log(action);
   switch (action.type){
-    case 'GET_DATA_REPOS':
-      return { ...state, ...action.owner};
+    case 'SUCCESS_FETCH':
+      return {
+        ...state,
+        ...action
+      };
     default:
       return state
   }}

@@ -1,16 +1,16 @@
 import React from 'react';
 
-const HomePage = (props) => {
+const HomePage = ({ onCahgeHandle, getRepos }) => {
   return(
     <div className='center-block'>
       <form >
         <input type="text"
                name='owner'
                placeholder='User or organization name'
-               //onChange={props}
+               onChange={ (event) => onCahgeHandle(event) }
         />
         <button type='submit'
-                //onClick={props}
+                onClick={ (event) => getRepos(event) }
         >Search</button>
       </form>
     </div>
