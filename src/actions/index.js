@@ -1,10 +1,12 @@
+import * as types from '../constants'
+
 export const getDataRepos = (owner) =>({
-  type: 'GET_DATA_REPOS',
+  type: types.GET_DATA_REPOS,
   owner
 });
 
-export const succesSfulFetch = (user, repos) =>({
-  type: 'SUCCESS_FETCH',
+export const successfulFetch = (user, repos) =>({
+  type: types.SUCCESS_FETCH,
   user,
   repos
 });

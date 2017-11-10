@@ -1,8 +1,9 @@
 import { takeEvery } from 'redux-saga/effects';
 import searchSaga from './basicData';
+import * as types from '../constants';
 
 export default function* watchSearchMedia() {
   yield [
-    takeEvery('GET_DATA_REPOS', searchSaga),
+    takeEvery(types.GET_DATA_REPOS, searchSaga),
   ];
 }

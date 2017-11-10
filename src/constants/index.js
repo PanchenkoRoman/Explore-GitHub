@@ -1,0 +1,2 @@
+export const GET_DATA_REPOS = 'GET_DATA_REPOS';
+export const SUCCESS_FETCH = 'SUCCESS_FETCH';

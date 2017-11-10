@@ -1,0 +1,17 @@
+@mixin flex($justify, $align, $direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $justify;
+  flex-wrap: wrap;
+}
+
+.repos-container {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #fff), linear-gradient(70deg, #dbedff 32%, #ebfff0);
+  padding-top: 30px;
+}
+
+.card-container{
+  padding: 15px;
+  @include flex(space-around, center, row);
+}

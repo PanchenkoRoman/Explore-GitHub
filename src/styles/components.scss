@@ -3,3 +3,36 @@
   cursor: pointer;
   text-decoration: none;
 }
+
+/*------UserInfo--------*/
+
+.avatar{
+  max-width: 1000%;
+  max-height: 25vh;
+  border-radius: 10px;
+  display: block;
+}
+
+.title-white{
+  color: white;
+}
+
+
+/*-----------reposCards--------------*/
+
+.card{
+  width: 300px;
+  height: 150px;
+  border: 1px #e1e4e8 solid;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  padding: 0 10px 10px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: border .2s linear, box-shadow .2s linear;
+  &:hover{
+    box-shadow: inset #0f76ff 0 0 2px 1px,
+    #0f76ff 0 0 2px 1px;
+    border: 1px #0f76ff solid;
+  }
+}
