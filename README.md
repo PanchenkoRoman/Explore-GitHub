@@ -7,3 +7,10 @@ Created with:
 * [react-router](https://github.com/ReactTraining/react-router) for creation multipages app
 * redux-saga(https://github.com/redux-saga/redux-saga) for creating side effects
 * Created with [Create React App](https://github.com/facebookincubator/create-react-app) + [custom-react-scripts](https://github.com/kitze/custom-react-scripts)
+
+Get started:
+
+``
+yarn install
+yarn start
+``
