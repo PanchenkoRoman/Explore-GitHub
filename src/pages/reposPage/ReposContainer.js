@@ -13,13 +13,16 @@ class ReposContainer extends Component {
 
     this.state = {
       sortBy: null,
-      byOrder: true
+      filterBy: null,
+      byOrder: true,
+      initialRepos: true
     };
 
     // bind methods
     this.setSortingParameter = ::this.setSortingParameter
+    this.setFilterParameter = ::this.setFilterParameter
+    this.setInitialRepos = ::this.setInitialRepos
   }
-
 
 
   setSortingParameter(parameter){
@@ -34,11 +37,25 @@ class ReposContainer extends Component {
     })
   }
 
+  setFilterParameter(){
+    this.setState({
+      filterBy: 'fork',
+      initialRepos: false
+    })
+  }
+
+  setInitialRepos(){
+    this.setState({
+      initialRepos: true
+    })
+  }
+
   render() {
     let { user, repos } = this.props;
-    let { sortBy, byOrder } = this.state;
+    let filteredRepos;
+    let { sortBy, byOrder, filterBy, initialRepos } = this.state;
 
-    if(!user){
+    if(!repos){
       return(
         <div className="home-page-container">
           <img src={spinner} alt="preloader"/>
@@ -49,17 +66,27 @@ class ReposContainer extends Component {
     if(sortBy){
       repos = Sorting(repos, sortBy, byOrder);
     }
-    console.log(this.state.byOrder);
 
+    if(filterBy){
+      filteredRepos = repos.filter((item) => item.fork === true)
+    }
+
+    if(initialRepos) {
+      filteredRepos = repos;
+    }
+
+    console.log(filteredRepos);
     return (
       <div className="repos-container">
         <UserInfo user={ user }/>
+        <button onClick={() => this.setFilterParameter()}>fork</button>
+        <button onClick={() => this.setInitialRepos()}>all</button>
         <Navigation sortBy={sortBy} byOrder={byOrder} sort={this.setSortingParameter}/>
         <div className='card-container'>
           {
-            repos.map((item) =>(
-              <ReposCard key={item.id} repos={item} />
-            ))
+            filteredRepos.map((item) =>(
+                <ReposCard key={item.id} repos={item} />
+              ))
           }
         </div>
       </div>
