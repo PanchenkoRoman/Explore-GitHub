@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import spinner from '../../assets/preloader2.gif'
 
 import Navigation from './Navigation';
@@ -37,9 +38,9 @@ class ReposContainer extends Component {
     })
   }
 
-  setFilterParameter(){
+  setFilterParameter(param){
     this.setState({
-      filterBy: 'fork',
+      filterBy: param,
       initialRepos: false
     })
   }
@@ -68,7 +69,7 @@ class ReposContainer extends Component {
     }
 
     if(filterBy){
-      filteredRepos = repos.filter((item) => item.fork === true)
+      filteredRepos = _.filter(repos, [filterBy, true])
     }
 
     if(initialRepos) {
@@ -79,7 +80,7 @@ class ReposContainer extends Component {
     return (
       <div className="repos-container">
         <UserInfo user={ user }/>
-        <button onClick={() => this.setFilterParameter()}>fork</button>
+        <button onClick={() => this.setFilterParameter('fork')}>fork</button>
         <button onClick={() => this.setInitialRepos()}>all</button>
         <Navigation sortBy={sortBy} byOrder={byOrder} sort={this.setSortingParameter}/>
         <div className='card-container'>
