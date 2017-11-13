@@ -38,7 +38,7 @@ class ReposContainer extends Component {
     let { user, repos } = this.props;
     let { sortBy, byOrder } = this.state;
 
-    if(user === undefined){
+    if(!user){
       return(
         <div className="home-page-container">
           <img src={spinner} alt="preloader"/>
@@ -54,11 +54,7 @@ class ReposContainer extends Component {
     return (
       <div className="repos-container">
         <UserInfo user={ user }/>
-        <button onClick={ () => this.setSortingParameter('stargazers_count')}>
-          sorted by stars
-        </button>
-        <Navigation/>
-        <hr/>
+        <Navigation sortBy={sortBy} byOrder={byOrder} sort={this.setSortingParameter}/>
         <div className='card-container'>
           {
             repos.map((item) =>(

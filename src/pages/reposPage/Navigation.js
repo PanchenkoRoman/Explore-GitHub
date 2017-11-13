@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import Arrows from '../../components/Arrows';
 
 class Navigation extends PureComponent {
   constructor(props){
@@ -27,17 +28,7 @@ class Navigation extends PureComponent {
 
   render(){
     const { sorting, filtering } = this.state;
-    const Arrows = (param) =>{
-      return(
-        <span>
-        {
-          param
-          ? <i className="fa fa-chevron-down" />
-          : <i className="fa fa-chevron-up" />
-        }
-        </span>
-      )
-    };
+    const { sort, byOrder, sortBy } =this.props;
 
     return(
       <div className='nav'>
@@ -45,6 +36,20 @@ class Navigation extends PureComponent {
           <span className='tab' onClick={ () => this.showPanel('sorting')}>Sorting by
             {Arrows(sorting)}
           </span>
+          {
+            sorting
+            ? <ul className='sort-filter'>
+                <li className='sort-item' onClick={() => sort('name')}>Repo name
+                  { sortBy === 'name' ? Arrows(byOrder) : '' }</li>
+                <li className='sort-item' onClick={() => sort('stargazers_count')}>Stars count
+                  { sortBy === 'stargazers_count' ? Arrows(byOrder) : '' }</li>
+                <li className='sort-item' onClick={() => sort('open_issues_count')}>Open issues
+                  { sortBy === 'open_issues_count' ? Arrows(byOrder) : '' }</li>
+                <li className='sort-item' onClick={() => sort('created_at')}>Created date
+                  { sortBy === 'created_at' ? Arrows(byOrder) : '' }</li>
+              </ul>
+            : ''
+          }
         </div>
       </div>
     )

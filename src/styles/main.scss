@@ -3,7 +3,11 @@
 @import './components';
 @import './ReposStyle';
 
-
 body{
   font-family: 'Open Sans', sans-serif;
+}
+
+ul{
+  list-style-type: none;
+  -webkit-padding-start: 0;
 }
