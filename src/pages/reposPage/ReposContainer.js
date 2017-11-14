@@ -4,7 +4,8 @@ import _ from 'lodash';
 import spinner from '../../assets/preloader2.gif'
 
 import Navigation from './Navigation';
-import Sorting from '../../utils/sorting'
+import Sorting from '../../utils/sorting';
+import Filtering from '../../utils/filtering';
 import UserInfo from '../../components/UserInfo';
 import ReposCard from '../../components/ReposCard';
 
@@ -15,6 +16,7 @@ class ReposContainer extends Component {
     this.state = {
       sortBy: null,
       filterBy: null,
+      filterType: null,
       byOrder: true,
       initialRepos: true
     };
@@ -38,23 +40,32 @@ class ReposContainer extends Component {
     })
   }
 
-  setFilterParameter(param){
+  setFilterParameter(param, e){
     this.setState({
       filterBy: param,
-      initialRepos: false
-    })
+      initialRepos: false,
+    });
+    if(!param){
+      this.setState({
+        filterBy: e.target.value,
+        initialRepos: false,
+        filterType: 'language'
+      })
+    }
   }
 
   setInitialRepos(){
     this.setState({
-      initialRepos: true
+      initialRepos: true,
+      filterBy: null,
+      filterType: null
     })
   }
 
   render() {
     let { user, repos } = this.props;
     let filteredRepos;
-    let { sortBy, byOrder, filterBy, initialRepos } = this.state;
+    let { sortBy, byOrder, filterBy, initialRepos, filterType } = this.state;
 
     if(!repos){
       return(
@@ -69,20 +80,24 @@ class ReposContainer extends Component {
     }
 
     if(filterBy){
-      filteredRepos = _.filter(repos, [filterBy, true])
+      filteredRepos = Filtering(repos, filterBy, filterType);
     }
 
-    if(initialRepos) {
+    if(initialRepos || filterBy === 'all') {
       filteredRepos = repos;
     }
 
-    console.log(filteredRepos);
+    let languages = _.uniqBy(filteredRepos, 'language');
+
     return (
       <div className="repos-container">
         <UserInfo user={ user }/>
-        <button onClick={() => this.setFilterParameter('fork')}>fork</button>
-        <button onClick={() => this.setInitialRepos()}>all</button>
-        <Navigation sortBy={sortBy} byOrder={byOrder} sort={this.setSortingParameter}/>
+        <Navigation filter={[this.setFilterParameter, this.setInitialRepos, languages]}
+                    sortBy={sortBy}
+                    filterBy={filterBy}
+                    byOrder={byOrder}
+                    sort={this.setSortingParameter}
+        />
         <div className='card-container'>
           {
             filteredRepos.map((item) =>(

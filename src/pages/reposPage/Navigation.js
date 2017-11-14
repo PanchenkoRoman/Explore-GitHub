@@ -28,8 +28,8 @@ class Navigation extends PureComponent {
 
   render(){
     const { sorting, filtering } = this.state;
-    const { sort, byOrder, sortBy } =this.props;
-
+    const { sort, byOrder, sortBy, filterBy, filter } = this.props;
+    const [setFilterParameter, setInitialRepos, languages] = filter;
     return(
       <div className='nav'>
         <div className='nav-block'>
@@ -49,6 +49,49 @@ class Navigation extends PureComponent {
                   { sortBy === 'created_at' ? Arrows(byOrder) : '' }</li>
               </ul>
             : ''
+          }
+        </div>
+        <div className='nav-block'>
+          <span className='tab' onClick={ () => this.showPanel('filtering')}>Filtering by
+            {Arrows(filtering)}
+          </span>
+          {
+            filtering
+              ? <ul className='sort-filter'>
+                <li className='filter-item'>
+                  Type:
+                  <span className='type' onClick={() => setInitialRepos()}>all,</span>
+                  <span className={`type ${filterBy === 'fork' ? 'active' : ''}`}
+                        onClick={() => setFilterParameter('fork')}>
+                    forks
+                  </span>
+                </li>
+                <li className='filter-item'>
+                  Issues:
+                  <span className='type' onClick={() => setInitialRepos()}>all,</span>
+                  <span className={`type ${filterBy === 'open_issues' ? 'active' : ''}`}
+                        onClick={() => setFilterParameter('open_issues')}>
+                    has open issues
+                  </span>
+                </li>
+                <li className='filter-item'>
+                  Language:
+                  <select onChange={(e) => setFilterParameter('', e)} name="language">
+                    <option value="all">all</option>
+                    {
+                      languages.map((item) => {
+                        return (
+                          <option key={item.id}
+                                  value={item.language}>
+                            {item.language}
+                          </option>
+                        )
+                      })
+                    }
+                  </select>
+                </li>
+              </ul>
+              : ''
           }
         </div>
       </div>
